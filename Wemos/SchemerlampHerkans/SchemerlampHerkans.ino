@@ -43,7 +43,7 @@ void setup() {
 
 void loop(void) {
   WiFiClient client = verbindenPi();
-  brand =false;
+  brand = false;
   client.print("setSchemerlamp");
 
   int vorigeBeweging = 0;
@@ -90,26 +90,19 @@ void loop(void) {
   }
 }
 
+// deze functie zet de led aan
 void ledOn() {
   leds[0] = CRGB::Red;  // Hiermee zetten we het ledje op een bepaalde kleur
-  FastLED.show();       // Hiermee wordt de led gezegd te laten zien wat er zojuist is ingesteld. Hij gaat in dit geval dus aan
-  for (int i = 0; i < 1000; i++) {
-    int beweging = leesBeweging();
-    if (beweging == 1) {
-      delay(1000);
-      Serial.println(i);      
-      ledOn();
-      //delay(1000);
-    }
-    delay(10);
-  }
+  FastLED.show();       // Hiermee wordt de led gezegd te laten zien wat er zojuist is ingesteld. Hij gaat in dit geval dus aan    
+  delay(1000);
+
   if (!brand){
     Serial.println("ledje uit plis" );  
     ledOff();
   }
-  
 }
-
+  
+// deze functie zet de led uit
 void ledOff() {
   Serial.println("led uit");
   leds[0] = CRGB::Black;
