@@ -239,7 +239,7 @@ void Apartment::handleRequest(uint16_t fd, const std::string& action){
     }else if(action == "setZuil"){
         setZuil(fd);
     }else if(action == "setSchemerlamp"){
-        setVenster(fd);
+        setSchemerlamp(fd);
     }
     // Display a warning if an invalid message was sent
     else{

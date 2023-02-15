@@ -21,7 +21,7 @@ void handleServerDisconnect(uint16_t fd)
 void handleServerInput(Apartment *apartment, uint16_t fd, char *buffer)
 {
     // Display the received input and the sender
-    std::cout << "Got input '" << buffer << "' from" << fd << ".\n";
+    std::cout << "Got input '" << buffer << "' from " << fd << ".\n";
 
     // Parse the input
     Parser prs;
