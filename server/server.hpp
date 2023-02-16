@@ -1,8 +1,8 @@
 /*
 * File: server.h
-* Author: M0rga-n
+* Author: MikeeRietveldt
 *
-* Created on December 9, 2022, 11:16 AM
+* Created on February 8, 2023, 09:16 AM
 */
 
 #ifndef SERVER_H
