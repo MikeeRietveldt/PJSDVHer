@@ -45,7 +45,7 @@ void loop() {
     return;
   
   // Set server configuration to match door usage. 
-  Serial.print("\nSetting deur to server");
+  Serial.print("\nSent: setDeur to server");
   client.print("setDeur");  // ENGLISH =============
 
   bool hulp = false;
@@ -161,11 +161,17 @@ bool connectToServer() {
 
   if (!client.connect(host, port)) {
     Serial.print("\nCouldn't establish a connection to (Pi) server on ");
+    Serial.print(host);
+    Serial.print(":");
+    Serial.print(port);
   }
 
   for (int i = 0; i < 10; i++) {
     if (client.connected()) {
       Serial.print("\n(Pi) Server connection established on ");
+      Serial.print(host);
+      Serial.print(":");
+      Serial.print(port);
       //Serial.print("" + host + ":" + port.to);
       return 1;
     }
@@ -174,6 +180,9 @@ bool connectToServer() {
   } 
   
   Serial.print("\nCouldn't establish a connection to (Pi) server on ");
+  Serial.print(host);
+  Serial.print(":");
+  Serial.print(port);
   // Serial.print( + host + ":" + port);
   return 0;
 }
@@ -197,6 +206,7 @@ int readInput() {
 }
 
 void lichtAan() {
+  Serial.println("\nLichtje aan");
   //Set PCA9554 outputs (IO44-IO7)
   Wire.beginTransmission(0x38);
   Wire.write(byte(0x01));
@@ -205,6 +215,7 @@ void lichtAan() {
 }
 
 void lichtUit() {
+  Serial.print("Lichtje uit");
   //Set PCA9554 outputs (IO44-IO7)
   Wire.beginTransmission(0x38);
   Wire.write(byte(0x01));
