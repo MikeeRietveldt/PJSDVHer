@@ -218,6 +218,7 @@ void Server::recvInputFromConnection(int fd)
         FD_CLR(fd, &masterfds);
         return;
     }
+    buffer[checkrecv] = '\0';
 
     #ifdef DEBUG
     // Print the data received from the client
