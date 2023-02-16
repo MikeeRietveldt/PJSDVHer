@@ -94,10 +94,13 @@ void loop(void) {
 void ledOn() {
   leds[0] = CRGB::Red;  // Hiermee zetten we het ledje op een bepaalde kleur
   FastLED.show();       // Hiermee wordt de led gezegd te laten zien wat er zojuist is ingesteld. Hij gaat in dit geval dus aan    
-  delay(1000);
+  for(int teller = 0; teller < 5 ; teller++)
+  {
+    delay(1000);
+  }          // delay zodat de lamp nog even aan blijft
 
-  if (!brand){
-    Serial.println("ledje uit plis" );  
+  if (!brand){ 
+    Serial.println("zet led uit" );  
     ledOff();
   }
 }
