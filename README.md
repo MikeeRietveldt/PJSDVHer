@@ -1,2 +1,3 @@
 # PJSDVHer
-Dit is de readme van github.
+
+Dit is de herkansing van Mike Rietveldt voor het project Software Development. Er is voornamelijk gefocussed op een goede uitbreidbare server code schrijven. De clients bestaan nog allemaal, aangezien ik voor deze herkansing 2 devices moest verbinden met de server heb ik de deur en schemerlamp gekozen. De andere meubels zijn nog steeds aanwezig in de server code waardoor deze makkelijk opnieuw kunnen worden gebruikt. Ook heb ik er voor gekozen om bij de lamp de brand functies te laten staan in de .ino file en bij de deur bewust gekozen om deze er uit te halen. Aan de server kant zitten alle functies er nog in, dit ook puur voor de uitbreidbaarheid.
