@@ -23,8 +23,8 @@ int deuropenuit = 0;
 void setup() {
   myservo.attach(D5);       // Assign pin D5 to be the servo pin.
   closeDoor();              // Close the door on program startup.
-  Serial.begin(115200);     // ================ serieel starten met de juiste baudrate.
-  Wire.begin();             // I2C communicatie beginnen.
+  Serial.begin(115200);     // Start the serial with the correct baudratio
+  Wire.begin();             // Start I2C Communication
 }
 
 void delaySeconds(int seconds) {
@@ -46,7 +46,7 @@ void loop() {
   
   // Set server configuration to match door usage. 
   Serial.print("\nSent: setDeur to server");
-  client.print("setDeur");  // ENGLISH =============
+  client.print("setDeur");  
 
   bool hulp = false;
   int previousInput = 999;
@@ -57,10 +57,6 @@ void loop() {
   */
   while (client.connected()) {
     int input = readInput();
-    // Serial.print("\nInput : ");
-    // Serial.print(input);
-    // Serial.print("\PreviousInput : ");
-    // Serial.print(previousInput);
     
     if (input != 0 && input == previousInput) {
       
@@ -156,6 +152,7 @@ void connectToWifi() {
   Serial.print("\nCouldn't establish a connection to wifi network");
 }
 
+//Try making a connection with the server
 bool connectToServer() {
   Serial.print("\nEstablishing connection to (Pi) server");
 
@@ -191,20 +188,21 @@ int readInput() {
   // Config PCA9554
   // Inside loop for debugging purpose (hot plugging wemos module into i/o board).
   // IO0-IO3 as input, IO4-IO7 as output.
-  Wire.beginTransmission(0x38);       // slave adres meegeven
+  Wire.beginTransmission(0x38);       // slave adress 
   Wire.write(byte(0x03));
   Wire.write(byte(0x0F));
   Wire.endTransmission();
 
   // Read PCA9554 outputs (IO40-IO3)
-  Wire.beginTransmission(0x38);       // slave adres meegeven
+  Wire.beginTransmission(0x38);       // slave adress 
   Wire.write(byte(0x00));
   Wire.endTransmission();
   Wire.requestFrom(0x38, 1);
-  unsigned int inputs = Wire.read();  // hier lees je waarde van knopje met I2C
-  return inputs & 0x03;               // knopje waarden teruggeven aan de main.
+  unsigned int inputs = Wire.read();  // Read the input value with I2C
+  return inputs & 0x03;               // Return the inputs to the main function
 }
 
+// Turns on the lights
 void lichtAan() {
   Serial.println("\nLichtje aan");
   //Set PCA9554 outputs (IO44-IO7)
@@ -214,6 +212,7 @@ void lichtAan() {
   Wire.endTransmission();
 }
 
+// Turns off the lights
 void lichtUit() {
   Serial.print("Lichtje uit");
   //Set PCA9554 outputs (IO44-IO7)
@@ -223,8 +222,9 @@ void lichtUit() {
   Wire.endTransmission();
 }
 
-void doorController(int status) {   // pi kan deze functie aanroepen om deur te openen
-  lichtAan();                       // licht aan want praktisch voor patiënt
+// Pi can call this function to open door
+void doorController(int status) {   
+  lichtAan();                       // Turn on the lights, this helps the patient
 
   if (status == 1) {
     myservo.write(deuropenin);
@@ -234,10 +234,11 @@ void doorController(int status) {   // pi kan deze functie aanroepen om deur te 
   }
 
   delaySeconds(5);
-  closeDoor();                // deur blijft 5 seconden open en gaat dan weer dicht.
+  closeDoor();                // Door stays open for 5 seconds
 }
 
-void closeDoor() {            // later moet brandvariabele meegegeven worden.
-  lichtUit();                 // licht hoeft niet meer aan bij een dichte deur
-  myservo.write(deurdicht);   // servo schrijven naar deur dicht hoek, 80 graden
+// Close the door
+void closeDoor() {            
+  lichtUit();                 // Light turns off when the door closes
+  myservo.write(deurdicht);   // Servo closes the door 
 }
