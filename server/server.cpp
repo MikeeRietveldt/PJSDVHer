@@ -4,7 +4,7 @@
 
 // define DEBUG for debug infomation
 
-// Initialize the apartment
+// Initialize the apartment and saving the adress of the apartment so we can communicate with it later
 Server::Server(Apartment *apartmentPointer) : apartment(apartmentPointer)
 {
     // Setup the server with the default port
@@ -20,6 +20,7 @@ Server::Server(Apartment *apartmentPointer, int port) : apartment(apartmentPoint
 
 Server::~Server()
 {
+    // To debug simply define DEBUG at the top.
     #ifdef DEBUG
     // Display the server is being destroyed
     printf("[SERVER] [DESTRUCTOR] Destroying Server.");
@@ -61,7 +62,7 @@ void Server::initSocket()//Set the socket options
     int opt = 1;
 
     // Set the socket options
-    int ret = setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
+    int ret = setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt)); // Testing if it works by putting it in ret.
 
     #ifdef DEBUG
     // Display the return value of setsockopt, to check whether it failed
