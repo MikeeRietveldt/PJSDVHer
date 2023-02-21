@@ -12,7 +12,7 @@ class Parser
         /**
          * @brief Splits data on whitespace
         */
-        void parse(char *buffer);
+        void parse(char *buffer); //We will end up with a group of characters followed by a whitespace and so on. (no dots or comma's).
 };
 
 #endif // !PARSER_H
